@@ -35,6 +35,8 @@ interface AppState {
   createProject: (project: any) => Project;
   toggleMilestone: (projectId: string, milestoneId: string) => void;
   markNotificationRead: (notificationId: string) => void;
+  markAllNotificationsRead: (role: UserRole) => void;
+  updateUser: (updates: Pick<User, 'name' | 'email' | 'district'>) => void;
 }
 
 export const useAppStore = create<AppState>((set, get) => ({
@@ -227,6 +229,21 @@ export const useAppStore = create<AppState>((set, get) => ({
       notifications: state.notifications.map(n =>
         n.id === notificationId ? { ...n, read: true } : n
       )
+    }));
+  },
+
+  markAllNotificationsRead: (role) => {
+    set(state => ({
+      notifications: state.notifications.map(n =>
+        !n.forRole || n.forRole.includes(role) ? { ...n, read: true } : n
+      )
+    }));
+  },
+
+  updateUser: (updates) => {
+    set(state => ({
+      user: state.user ? { ...state.user, ...updates } : state.user,
+      currentUser: state.currentUser ? { ...state.currentUser, ...updates } : state.currentUser,
     }));
   }
 }));

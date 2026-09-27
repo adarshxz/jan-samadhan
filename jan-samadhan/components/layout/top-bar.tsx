@@ -122,7 +122,7 @@ export function TopBar({ role, onMenuClick }: TopBarProps) {
                 <div className="text-xs text-gray-500">{currentUser?.email}</div>
               </div>
               <div className="p-1">
-                <button onClick={() => { router.push(`/${role}/profile`); setShowProfile(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md">Profile</button>
+                <button onClick={() => { router.push(`/${activeRole}/profile`); setShowProfile(false); }} className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded-md">Profile</button>
                 <button onClick={() => { router.push('/login'); setShowProfile(false); }} className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-md">Sign out</button>
               </div>
             </div>
